@@ -6101,7 +6101,7 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
       { id: "週四", start: "16:00", end: "17:30", note: "" },
       { id: "週五", start: "16:00", end: "17:30", note: "" }
     ];
-    doc.tables.taskTypes = ["家課", "閱讀", "SEL", "永齡教材", "線上學習", "練習卷", "測驗", "桌遊", "其他"].map((id) => ({ id, note: id === "SEL" ? "社會情緒學習活動（HOPE SEL 課程）" : "" }));
+    doc.tables.taskTypes = ["家課", "閱讀", "SEL", "永齡教材", "線上學習", "練習卷", "測驗", "桌遊", "其他"].map((id) => ({ id, note: id === "SEL" ? "社會情緒學習活動" : "" }));
     doc.updatedAt = nowStr();
     await backend.write(BASE_FILE, JSON.stringify(doc, null, 1));
   }
@@ -6150,7 +6150,7 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
     const T = Object.fromEntries(ALL_TABLES.map((t) => [t, /* @__PURE__ */ new Map()]));
     const base = DB.files.get(BASE_FILE)?.doc || emptyDoc(BASE_FILE);
     for (const t of BASE_TABLES) for (const r of base.tables?.[t] || []) if (r && r.id != null && !r.deleted) T[t].set(String(r.id), r);
-    if (!T.taskTypes.has("SEL")) T.taskTypes.set("SEL", { id: "SEL", note: "社會情緒學習活動（HOPE SEL 課程）" });
+    if (!T.taskTypes.has("SEL")) T.taskTypes.set("SEL", { id: "SEL", note: "社會情緒學習活動" });
     const win = Object.fromEntries(TX_TABLES.map((t) => [t, /* @__PURE__ */ new Map()]));
     const origin = /* @__PURE__ */ new Map();
     for (const [p, f] of DB.files) {
@@ -8335,10 +8335,10 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
   }
 
   // src/js/flowdata.js
-  var SEL_ACTS = [["基礎入門", [["B-1", "情緒小夥伴——開心", 10], ["B-2", "情緒光譜——開心", 10], ["B-3", "情緒小偵探——開心", 10], ["B-4", "情緒小夥伴——難過", 10], ["B-5", "情緒光譜——難過", 10], ["B-6", "情緒小偵探——難過", 10], ["B-7", "情緒小夥伴——生氣", 10], ["B-8", "情緒光譜——生氣", 10], ["B-9", "情緒小偵探——生氣", 10], ["B-10", "情緒小夥伴——噁心或厭惡", 10], ["B-11", "情緒光譜——噁心或厭惡", 10], ["B-12", "情緒小偵探——噁心或厭惡", 10], ["B-13", "情緒小夥伴——害怕", 10], ["B-14", "情緒光譜——害怕", 10], ["B-15", "情緒小偵探——害怕", 10], ["B-16", "情緒小夥伴——驚訝或驚喜", 10], ["B-17", "情緒光譜——驚訝或驚喜", 10], ["B-18", "情緒小偵探——驚訝或驚喜", 10]]], ["情緒覺察工具", [["T-1", "認識我的外星夥伴", 10], ["T-2", "情緒動物代言人", 10], ["T-3", "情緒紅綠燈", 10], ["T-4", "情緒遙控器", 10], ["T-5", "情緒 Check In", 10], ["T-6", "情緒探索號帶動唱", 10], ["T-7", "聽聽音樂 情緒流動", 10], ["T-8", "自由畫畫", 10], ["T-9", "自由書寫", 10], ["T-10", "情緒 Check In——今天我在哪個家族的家", 10], ["T-11", "情緒光譜排隊", 15], ["T-12", "傳遞杯子——專注、合作與情緒調節", 10]]], ["HOPE牌卡", [["H-1", "安心地圖——找到讓我心安的地方", 10], ["H-2", "喜悅存摺——收集今天的好事", 15], ["H-3", "給自己的獎狀", 10], ["H-4", "我的舒適圈——界線雷達", 15], ["H-5", "拒絕句練習站", 10], ["H-6", "委屈翻譯機", 15], ["H-7", "我的求救名單", 15], ["H-8", "情緒許可證", 15], ["H-9", "表情漫畫家", 10], ["H-10", "好奇心偵探", 15], ["H-11", "身體的警報器：我的害怕地圖", 15], ["H-12", "我的安全盾牌", 15], ["H-13", "怒火溫度計：我的情緒溫度", 15], ["H-14", "界線用語工廠", 15], ["H-15", "情緒光譜排隊", 10], ["H-16", "今天我在哪個家族的家", 10], ["H-17", "情境小劇場——你怎麼了？", 20], ["H-18", "回穩工具箱：我的情緒急救包", 15], ["H-19", "給情緒的一封信", 20], ["H-20", "情緒抽卡說故事", 15], ["H-21", "感恩三明治：把謝謝說清楚", 15], ["H-22", "幸福快照：我的美好瞬間相簿", 10], ["H-23", "鼓勵信：寫給一個月後的自己", 12], ["H-24", "怪怪的雷達：身體小提醒", 15], ["H-25", "從怪怪的，到慢慢懂自己", 15], ["H-26", "感覺翻譯機", 15], ["H-27", "心願氣球", 12], ["H-28", "好好聽你說", 15], ["H-29", "意外來了怎麼辦：停看選練習", 10], ["H-30", "我發現的哇世界", 15], ["H-31", "煩惱分類站", 15], ["H-32", "緊張小貓來了，我知道怎麼辦", 15], ["H-33", "生氣小偵探", 15], ["H-34", "好好說對不起", 12], ["H-35", "情緒觀察員：今天的班級情緒天氣", 15], ["H-36", "情緒自畫像", 20], ["H-37", "身體掃描", 15], ["H-38", "交換情緒便利貼", 15], ["H-39", "我的情緒小故事", 20], ["H-40", "情緒成長紀錄", 15], ["H-41", "情緒解碼大作戰", 40]]], ["冷靜工具箱", [["C-1", "呼吸小夥伴", 10], ["C-2", "爬爬五指山", 10], ["C-3", "吹蠟燭呼吸法", 10], ["C-4", "緊張小貓五步驟", 10], ["C-5", "自創冷靜魔法", 10], ["C-6", "找尋每一個人的冷靜空間", 10]]], ["正念覺察", [["M-1", "身體掃描", 15], ["M-2", "跟身體做朋友", 10], ["M-3", "感受當下——運用五感回到此刻", 10], ["M-4", "雲冥想", 10], ["M-5", "正念散步——感官覺察之旅", 15], ["M-6", "禪繞靜心繪圖", 15], ["M-7", "正念隨身行——戶外五感尋寶", 15]]], ["情境故事", [["S-1", "故事時間（一）——掉落的霜淇淋", 10], ["S-2", "故事時間（二）——弟弟的眼淚", 10], ["S-3", "故事時間（三）——借不借的兩難", 10], ["S-4", "故事時間（四）——操場上的爭執", 10], ["S-5", "故事時間（五）——爭奪遙控器的夜晚", 10], ["S-6", "故事時間（六）——上台的勇氣", 10], ["S-7", "故事時間（七）——面對全新的挑戰", 10], ["S-8", "故事時間（八）——變化中的驚喜", 10], ["S-9", "故事時間（九）——等待中的情緒", 10], ["S-10", "故事時間（十）——孤單中的努力", 10]]], ["延伸活動", [["E-1", "情緒對對碰——翻出你的感受力", 10], ["E-2", "樂動紓壓 5 招——身體是最好的情緒出口", 10], ["E-3", "單腳平衡——專注當下的身體練習", 10], ["E-4", "袋子裡面有什麼——情緒觸摸遊戲", 10], ["E-5", "情緒迷宮桌遊——選擇與後果的體驗", 40], ["E-6", "我的超能力——認識自己的優勢", 18], ["E-7", "我的選擇清單——回顧好決定", 15], ["E-8", "夢想目標樹——種下成長的種子", 15]]], ["積木創作", [["L-A", "情緒建築師", 40], ["L-B", "我的情緒機器人", 40], ["L-C", "友誼動物園", 40], ["L-D", "合作塔", 15], ["L-E", "感恩花園", 40], ["L-F", "衝突解決迷宮", 40]]]];
+  var SEL_ACTS = [];      // 內建 SEL 活動清單已清空：各分校在「系統清單 → SEL 活動」匯入自己的活動
   var SEL_MIN = Object.fromEntries(SEL_ACTS.flatMap(([, list3]) => list3.map(([c, n, m]) => [`${c} ${n}`, m])));
-  var BACKUP_BANK = { "國語": ["注音符號遊戲", "共讀國語繪本", "聆聽有聲故事", "國字銀行", "國語日報漫畫/短文閱讀", "節慶國語活動", "拼字類/造句桌遊", "故事骰桌遊", "說書人桌遊"], "英語": ["英語撲克牌卡", "英語BRAIN STONE桌遊", "英語字母街桌遊", "英語字卡相關活動", "平板英語教材", "節慶英語活動", "共讀英語繪本", "聆聽英語有聲故事/影音", "酷英單字挑戰/句型挑戰", "Wordwall"], "數學": ["數學撲克牌卡", "共讀數學繪本", "PagamO、均一、因才網、雲林STUDY", "數學類積木", "平板數學教材"] };
-  var BACKUP_OTHER = ["積木", "其他類桌遊", "曼陀羅畫/禪繞畫", "專注力訓練遊戲", "著色畫(請與社工討論)", "學生有興趣的繪本", "onestudy線上學院"];
+  var BACKUP_BANK = {};      // 內建備用任務已清空：各分校在「系統清單 → 備用任務」匯入自己的選項
+  var BACKUP_OTHER = [];
   var BACKUP_COUNT = 3;
   var BACKUP_MODE = "備用";
   var READING_ACTS = ["共讀繪本", "自主閱讀", "聆聽有聲故事", "國語日報漫畫/短文閱讀", "學生有興趣的繪本"];
@@ -8357,8 +8357,8 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
     return "";
   }
   var TASK_CATS = ["本科", "家課", "閱讀", "SEL", "其他"];
-  var SUBJECT_TASK_HINTS = ["習作", "學習單練習", "課本練習", "單字／生字練習", "單元複習", "單元小考", "平板教材"];
-  var OTHER_ACTS_EXTRA = ["班級活動", "戶外活動", "節慶活動"];
+  var SUBJECT_TASK_HINTS = [];      // 內建任務內容提示已清空：各分校在「系統清單 → 任務內容提示」匯入
+  var OTHER_ACTS_EXTRA = [];
   var MATH_TESTS = [["1-1", "一年級", "第1回", "整數（一）"], ["1-2", "一年級", "第1回", "長度（一）"], ["1-3", "一年級", "第1回", "用錢（一）"], ["1-4", "一年級", "第1回", "時間（一）"], ["1-5", "一年級", "第1回", "綜合練習"], ["2-1", "一年級", "第2回", "整數（二）秘技一、二"], ["2-2", "一年級", "第2回", "整數（二）秘技三"], ["2-3", "一年級", "第2回", "整數（二）秘技四"], ["2-4", "一年級", "第2回", "圖形（一）、統計圖表（一）"], ["2-5", "一年級", "第2回", "綜合練習"], ["3-1", "二年級", "第3回", "整數（三）"], ["3-2", "二年級", "第3回", "圖形（二）"], ["3-3", "二年級", "第3回", "用錢（二）"], ["3-4", "二年級", "第3回", "時間（二）"], ["3-5", "二年級", "第3回", "綜合練習"], ["4-1", "二年級", "第4回", "整數（四）祕技一、二"], ["4-2", "二年級", "第4回", "整數（四）祕技三、四、五"], ["4-3", "二年級", "第4回", "長度（二）"], ["4-4", "二年級", "第4回", "容量（一）、重量（一）"], ["4-5", "二年級", "第4回", "綜合練習"], ["5-1", "三年級", "第5回", "整數（五）、圖形（三）"], ["5-2", "三年級", "第5回", "分數（一）"], ["5-3", "三年級", "第5回", "容量（二）、長度（三）"], ["5-4", "三年級", "第5回", "時間（三）"], ["5-5", "三年級", "第5回", "綜合練習"], ["6-1", "三年級", "第6回", "整數（六）"], ["6-2", "三年級", "第6回", "統計圖表（二）、重量（二）"], ["6-3", "三年級", "第6回", "周長與面積（一）"], ["6-4", "三年級", "第6回", "小數（一）"], ["6-5", "三年級", "第6回", "綜合練習"], ["7-1", "四年級", "第7回", "整數（七）"], ["7-2", "四年級", "第7回", "概數、分數（二）"], ["7-3", "四年級", "第7回", "長度（四）、體積（一）"], ["7-4", "四年級", "第7回", "統計圖表（三）、角與角度（一）"], ["7-5", "四年級", "第7回", "四上綜合練習"], ["8-1", "四年級", "第8回", "整數（八）、圖形（四）"], ["8-2", "四年級", "第8回", "分數（三）"], ["8-3", "四年級", "第8回", "小數（二）"], ["8-4", "四年級", "第8回", "周長與面積（二）"], ["8-5", "四年級", "第8回", "時間（四）"], ["9-1", "五年級", "第9回A", "整數（九）"], ["9-2", "五年級", "第9回A", "因數與倍數（一）"], ["9-3", "五年級", "第9回A", "圖形（五）、分數（四）"], ["9-4", "五年級", "第9回B", "小數（三）"], ["9-5", "五年級", "第9回B", "周長與面積（三）、小數（四）"], ["10-1", "五年級", "第10回A", "整數（十）"], ["10-2", "五年級", "第10回A", "因數與倍數（二）、分數（五）"], ["10-3", "五年級", "第10回B", "角與角度（二）、比率"], ["10-4", "五年級", "第10回B", "重量（三）、時間（五）"], ["10-5", "五年級", "第10回B", "體積（二）"], ["11-1", "六年級", "第11回A", "因數與倍數（三）"], ["11-2", "六年級", "第11回A", "分數（六）、統計圖表（四）"], ["11-3", "六年級", "第11回A", "小數（五）"], ["11-4", "六年級", "第11回B", "比與比值、速度"], ["11-5", "六年級", "第11回B", "圖形（六）"], ["12-1", "六年級", "第12回A", "基準量與比較量、等量公理、解題"], ["12-2", "六年級", "第12回A", "圖形（七）"], ["12-3", "六年級", "第12回B", "周長與面積（四）"], ["12-4", "六年級", "第12回B", "體積（三）、比例尺"], ["12-5", "六年級", "第12回B", "綜合練習"]];
   var BOOKS = ["第一冊", "第二冊", "第三冊", "第四冊"];
   var ABC_IN = {
@@ -8392,8 +8392,8 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
   var EN_STARTER = { parts: 4, q: 8, ok: 2 };
   var EN_FINAL = { parts: 7, total: 36, ok: 7 };
   var EN_VERSIONS = ["A", "B", "C"];
-  var BREATH_PARTNERS = [["小青蛙正念呼吸", "https://www.youtube.com/watch?v=Pjmei-VCFkI"], ["蝴蝶呼吸法", "https://www.youtube.com/watch?v=E4tdReVg_EQ"], ["五指山呼吸", "https://www.youtube.com/watch?v=JlCgHnZ8bdk"], ["1比2呼吸法", "https://www.youtube.com/watch?v=Rb7t9M2KqdE"], ["腹式呼吸法", "https://www.youtube.com/watch?v=KzIWhRP0W3c"], ["手指變變變", "https://www.youtube.com/watch?v=kWUhhcgrKZs"], ["風車呼吸法", "https://www.youtube.com/watch?v=RHrxjizUWfQ"], ["單邊呼吸", "https://www.youtube.com/watch?v=bq2GWpphdlU"], ["呼吸想像力", "https://www.youtube.com/watch?v=s8IIW7f7SLU"], ["吹蠟燭", "https://www.youtube.com/watch?v=k2WXVAeXrrc"], ["兒童正念小遊戲", "https://youtu.be/sBXBRmaZYU8?t=131"], ["STOP小咒語（可結合英語課）", "https://youtu.be/m-bwZAAsX7s?t=57"], ["Rose, Thorn, and Bud（可結合英語課）", "https://youtu.be/M6YNw12YLog"]];
-  var BODY_PARTNERS = [["抖抖健康操", "https://www.youtube.com/watch?v=0HYj-rH-yn4"], ["抓蚊子", "https://www.youtube.com/watch?v=Z-03cu-RH6k"], ["Kids Yoga 1", "https://www.youtube.com/watch?v=29DQJWGwEnY"], ["Kids Yoga 2", "https://www.youtube.com/watch?v=-RIFKr8GwJQ"], ["坐姿瑜珈", "https://www.youtube.com/watch?v=oYI0TPJOuGk"], ["抖抖舞", "https://www.youtube.com/watch?v=DsUPVERZFlI"], ["動物舞", "https://www.youtube.com/watch?v=XS9LX1CXuJA"], ["長高體操", "https://www.youtube.com/watch?v=Z0VjXmmxKRQ"], ["海星放鬆", "https://open.spotify.com/episode/2Fnu4Pb1u9cJ1mUVTRGpBG"], ["百變小演員", "https://youtu.be/Sngr8gpQlLg"], ["頭部鬆一鬆", "https://youtu.be/jJ2HZxbOBz4"], ["落雨鬆一鬆", "https://youtu.be/19ifcjZmqQ0"], ["加油打氣", "https://youtu.be/EZZsXpeNGlc"], ["打樁機", "https://youtu.be/OoL_lN1Zr3g"], ["不倒翁", "https://youtu.be/-EeslTGxfSM"], ["小木偶", "https://youtu.be/zFt0vh2hgFI"], ["漸進式肌肉鬆弛練習", "https://youtu.be/bDb8pUy-Xts"], ["平衡感遊戲", "https://youtu.be/EzZ4ra9V3-I"]];
+  var BREATH_PARTNERS = [];      // 內建靜心活動已清空：各分校在「系統清單 → 靜心活動」匯入自己的活動與示範影片
+  var BODY_PARTNERS = [];
   var SEL_ASPECTS = [["selContent", "教案內容"], ["selTime", "教案時間規劃"], ["selResponse", "學童回饋度"]];
   var VISIT_SUBJECTS = ["國語", "英語", "數學"];
   var VISIT_DUE = { pre: 7, post1: 3, post2: 14 };
@@ -8540,7 +8540,6 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
           need(["呼吸夥伴", "身體夥伴"].includes(str(c)), `類別要填「呼吸夥伴」或「身體夥伴」：${c}`);
           v[str(c) === "呼吸夥伴" ? "breath" : "body"].push([str(n), str(u)]);
         }
-        need(v.breath.length, "至少要有一個呼吸夥伴");
         return v;
       },
       apply: (v) => {
@@ -9277,15 +9276,15 @@ var XLSX={};function make_xlsx_lib(a){a.version="0.18.5",a.style_version="1.2.0"
       const i = list3.findIndex(([n]) => n === prev?.mindful);
       if (i >= 0) return list3[(i + 1) % list3.length][0];
     }
-    return BREATH_PARTNERS[0][0];
+    return (BREATH_PARTNERS[0] || BODY_PARTNERS[0] || [""])[0];      // 還沒有靜心活動清單時不自動帶入
   }
   var escA = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function mindfulPicker(id, value, cls = "select", inCls = cls === "select" ? "input" : cls) {
     const v = String(value || "");
     const other = !!v && !partnerUrl().has(v);
     const opt = (list3) => list3.map(([n]) => `<option value="${escA(n)}" ${n === v ? "selected" : ""}>${escA(n)}</option>`).join("");
-    return `<span class="mf-pick" id="${id}"><select class="${cls}" data-mf="sel"><option value="">（未選）</option><optgroup label="呼吸夥伴">${opt(BREATH_PARTNERS)}</optgroup>
-    <optgroup label="身體夥伴">${opt(BODY_PARTNERS)}</optgroup><option value="__other" ${other ? "selected" : ""}>其他（自行輸入）</option></select>
+    return `<span class="mf-pick" id="${id}"><select class="${cls}" data-mf="sel"><option value="">（未選）</option>${BREATH_PARTNERS.length ? `<optgroup label="呼吸夥伴">${opt(BREATH_PARTNERS)}</optgroup>` : ""}
+    ${BODY_PARTNERS.length ? `<optgroup label="身體夥伴">${opt(BODY_PARTNERS)}</optgroup>` : ""}<option value="__other" ${other ? "selected" : ""}>其他（自行輸入）</option></select>
     <input class="${inCls}" data-mf="other" value="${other ? escA(v) : ""}" placeholder="輸入其他靜心活動" ${other ? "" : "hidden"}>
     <a class="small no-print" data-mf="link" target="_blank" rel="noopener" href="${escA(partnerUrl().get(v) || "#")}" ${partnerUrl().has(v) ? "" : "hidden"}>▶ 示範影片</a></span>`;
   }
@@ -15356,7 +15355,7 @@ ${lines.join("\n")}`;
   var auto6 = null;
   var ctxRef = null;
   var SERIES = ["--s1", "--s2", "--s3", "--s4", "--s5"];
-  var CAT_NOTE = { 本科: "永齡教材、習作、學習單等本科學習", 家課: "學校作業", 閱讀: "閱讀與閱讀理解", SEL: "社會情緒學習活動（HOPE SEL 課程）", 其他: "班級活動、桌遊、積木等" };
+  var CAT_NOTE = { 本科: "永齡教材、習作、學習單等本科學習", 家課: "學校作業", 閱讀: "閱讀與閱讀理解", SEL: "社會情緒學習活動", 其他: "班級活動、桌遊、積木等" };
   function catColor(cat) {
     const i = TASK_CATS.indexOf(cat);
     return i < 0 ? "var(--mark-neutral)" : `var(${SERIES[i]})`;
@@ -15721,7 +15720,7 @@ ${lines.join("\n")}`;
     if (cat === "SEL") {
       const m = selMin(t.content);
       const known = m !== null;
-      const hint = m ? m > bmin && bmin > 0 ? `<span style="color:var(--critical)">建議 ${m} 分鐘，超過這個任務的 ${bmin} 分鐘，可連排幾個任務</span>` : `建議 ${m} 分鐘` : "活動內容可在 HOPE SEL 課程活動地圖查看";
+      const hint = m ? m > bmin && bmin > 0 ? `<span style="color:var(--critical)">建議 ${m} 分鐘，超過這個任務的 ${bmin} 分鐘，可連排幾個任務</span>` : `建議 ${m} 分鐘` : selGroups().length ? "" : "還沒有 SEL 活動清單：請督導到「系統清單 → SEL 活動」匯入分校自己的活動清單";
       const opts2 = (list3) => list3.map((o) => `<option value="${esc(o.value)}" ${o.value === t.content ? "selected" : ""}>${esc(o.label)}${o.min ? `（${o.min} 分）` : ""}</option>`).join("");
       return `<label class="field"><span>SEL 活動</span><select class="select" data-x="content"><option value="">請選擇 SEL 活動</option>${selGroups().map(([part, list3]) => part ? `<optgroup label="${esc(part)}">${opts2(list3)}</optgroup>` : opts2(list3)).join("")}${t.content && !known ? `<option selected>${esc(t.content)}</option>` : ""}</select></label>
       <div class="small muted">${hint}</div>`;
@@ -16052,7 +16051,7 @@ ${lines.join("\n")}`;
   var isHere = (a) => ["出席", "遲到", "早退"].includes(a);
   var splitList = (v) => String(v || "").split(/[；、]/).map((x) => x.trim()).filter(Boolean);
   var UNDONE_SEP = "；";
-  var SEL_NAMES = SEL_ACTS.flatMap(([, list3]) => list3.map(([c, n]) => `${c} ${n}`));
+  var selNames = () => (S.data?.selActivities || []).length ? S.data.selActivities.map((r) => r.name) : SEL_ACTS.flatMap(([, list3]) => list3.map(([c, n]) => `${c} ${n}`));      // 分校匯入的 SEL 活動清單
   var SEL_KEYS = ["selActivity", "selContent", "selTime", "selResponse", "selWhy", "selRecord", "selQuestion"];
   function flowSel(sessionId) {
     if (!sessionId) return "";
@@ -16060,7 +16059,7 @@ ${lines.join("\n")}`;
     for (const b of blocksOf(sessionId)) {
       if (b.mode === "備用") continue;
       for (const t of tasksOf(b.id)) if (taskCat(t.type) === "SEL" && (t.content || "").trim()) out.push(t.content.trim());
-      const hit = SEL_NAMES.find((n) => (b.content || "").includes(n) || (b.title || "").includes(n));
+      const hit = selNames().find((n) => (b.content || "").includes(n) || (b.title || "").includes(n));
       if (hit) out.push(hit);
     }
     return [...new Set(out)].join("、");
@@ -16288,7 +16287,7 @@ ${lines.join("\n")}`;
     return `<div class="card-head"><h3>SEL 活動紀錄</h3><span class="sub">${rs.flowSel ? "已從教學流程帶入活動" : "簡要記錄就好"}</span></div>
     <div class="card-body stack" style="gap:12px">
       <label class="field"><span>活動內容</span><input class="input" data-info="selActivity" list="r-selacts" value="${esc(i.selActivity)}" placeholder="例：T-2 情緒動物代言人">
-        <datalist id="r-selacts">${SEL_NAMES.map((n) => `<option value="${esc(n)}">`).join("")}</datalist></label>
+        <datalist id="r-selacts">${selNames().map((n) => `<option value="${esc(n)}">`).join("")}</datalist></label>
       <div class="field"><span>施行狀況</span><div class="sel-asp">${SEL_ASPECTS.map(([k, label2]) => `<div class="sel-asp-row"><span class="small">${label2}</span>
         <div class="seg pick" data-selpick="${k}">${["良好", "不佳"].map((v) => `<button type="button" data-v="${v}" class="${i[k] === v ? "on " + (v === "良好" ? "good" : "bad") : ""}">${v}</button>`).join("")}</div></div>`).join("")}</div></div>
       ${bad || i.selWhy ? `<label class="field"><span>哪裡不佳？</span><input class="input" data-info="selWhy" value="${esc(i.selWhy)}" placeholder="例：說明用詞對低年級太難、時間不夠做完學習單"></label>` : ""}
@@ -19624,7 +19623,12 @@ ${parts[0][1]}` : parts.map(([d, t]) => `${d} ${t}`).join("\n");
   }
 
   // src/js/pages/selfb.js
-  var ORDER2 = new Map(SEL_ACTS.flatMap(([, list3]) => list3.map(([c, n]) => `${c} ${n}`)).map((n, i) => [n, i]));
+  var ORDER_CACHE = { src: void 0, m: null };      // SEL 活動的排序：照分校匯入的清單順序
+  var ORDER2 = { get: (n) => {
+    const src = S.data?.selActivities;
+    if (!ORDER_CACHE.m || ORDER_CACHE.src !== src) ORDER_CACHE = { src, m: new Map(selNames().map((x, i) => [x, i])) };
+    return ORDER_CACHE.m.get(n);
+  } };
   var SEL_KEYS2 = ["selActivity", "selContent", "selTime", "selResponse", "selWhy", "selRecord", "selQuestion"];
   var hasSel = (s) => SEL_KEYS2.some((k) => s[k]);
   var acts = (s) => String(s.selActivity || "（未填活動）").split(/[、,，]/).map((x) => x.trim()).filter(Boolean);
