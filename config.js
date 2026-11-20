@@ -5,6 +5,7 @@
 window.YL_CLOUD = {
   api: '',
   branches: [
-    // { id: 'ytu', name: '東華分校', api: 'https://script.google.com/macros/s/AKfycbzQPsMG4wJxqK_tsNdZ1wNOPLZgQIWax8CsXaWMGLPvmNS6CsV_1klaZgvJuKnHtkL9NQ/exec' },
+    { id: 'donghua', name: '東華分校', api: 'https://script.google.com/macros/s/AKfycbzQPsMG4wJxqK_tsNdZ1wNOPLZgQIWax8CsXaWMGLPvmNS6CsV_1klaZgvJuKnHtkL9NQ/exec' },
+    // { id: 'ytu', name: '雲科大分校', api: 'https://script.google.com/macros/s/……/exec' },
   ],
 };
